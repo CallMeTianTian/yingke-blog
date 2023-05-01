@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.UserPermissionMapper">
+
+  <resultMap id="UserPermissionResultMap" type="com.tiantian.pojo.UserPermission">
+    <!--映射关系-->
+    <id column="id" property="id"/>
+    <result column="permission" property="permission" typeHandler="com.tiantian.handler.ListToVarcharTypeHandler"/>
+    <result column="role" property="role" typeHandler="com.tiantian.handler.ListToVarcharTypeHandler"/>
+  </resultMap>
+
+
+  <insert id="addPermissionById" parameterType="com.tiantian.pojo.UserPermission">
+    insert into user_permission(id, permission, role)
+    VALUES (#{id},
+            #{userPermissionList,typeHandler=com.tiantian.handler.ListToVarcharTypeHandler},
+            #{roleList,typeHandler=com.tiantian.handler.ListToVarcharTypeHandler});
+  </insert>
+
+  <select id="selectPermission" resultMap="UserPermissionResultMap">
+    select id, permission, role
+    from user_permission
+    where id = #{id};
+  </select>
+</mapper>

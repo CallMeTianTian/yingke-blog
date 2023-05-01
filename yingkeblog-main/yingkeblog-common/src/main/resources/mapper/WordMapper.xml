@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.WordMapper">
+  <resultMap id="WordMapperResultMap" type="com.tiantian.pojo.Word">
+    <!--映射关系-->
+    <id column="id" property="id"/>
+    <result column="word" property="word"/>
+    <result column="is_show" property="isShow"/>
+  </resultMap>
+
+  <select id="getWordAndId" resultMap="WordMapperResultMap">
+    select id, word, is_show
+    from good_words
+    where is_show = 0
+    limit 1;
+  </select>
+
+  <update id="updateIsShowByIdInt">
+    update good_words
+    set is_show = 1
+    where id = #{id}
+  </update>
+</mapper>

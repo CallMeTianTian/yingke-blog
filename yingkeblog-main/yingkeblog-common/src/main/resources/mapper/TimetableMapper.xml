@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.TimetableMapper">
+  <resultMap id="TimetableMapperResultMap" type="com.tiantian.pojo.Timetable">
+    <!--映射关系-->
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="subject" property="subject"/>
+    <result column="class_time" property="classTime"/>
+    <result column="week" property="week"/>
+  </resultMap>
+  <select id="selectByUserId" resultType="com.tiantian.pojo.Timetable">
+    select *
+    from time_table where user_id = #{UserId};
+  </select>
+  <select id="selectByUserIdAndWeek" resultType="com.tiantian.pojo.Timetable">
+    select *
+    from time_table where user_id = #{userId} and week = #{week};
+  </select>
+</mapper>

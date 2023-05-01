@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.UserCommentMapper">
+  <resultMap id="UserCommentMapperResultMap" type="com.tiantian.utils.vo.UserCommentVO">
+    <!--映射关系-->
+    <id column="id" property="id"/>
+    <result column="blog_id" property="blogId"/>
+    <result column="uid" property="uid"/>
+    <result column="username" property="username"/>
+    <result column="headurl" property="headurl"/>
+    <result column="content" property="content"/>
+    <result column="release_time" property="releaseTime"/>
+  </resultMap>
+
+  <select id="getUserCommonsByBlogId" resultType="com.tiantian.utils.vo.UserCommentVO">
+    select tuc.id, tuc.blog_id, tuc.uid, tuc.content, tuc.release_time, u.username, u.headurl
+    from tb_user_comment tuc, user u where tuc.uid = u.uid and tuc.blog_id = #{blogId} order by tuc.release_time desc;
+  </select>
+
+  <insert id="addUserComment">
+    insert into tb_user_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">blog_id,</if>
+      <if test="uid != null">uid,</if>
+      <if test="content != null and content != ''">content,</if>
+      <if test="releaseTime != ''">release_time</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogId != null">#{blogId},</if>
+      <if test="uid != null">#{uid},</if>
+      <if test="content != null and content != ''">#{content},</if>
+      <if test="releaseTime != ''">#{releaseTime}</if>
+    </trim>
+  </insert>
+
+  <delete id="deleteUserCommentByCommentIdAndUid">
+    delete
+    from tb_user_comment
+    where id =  #{commentId} and uid = #{uid};
+  </delete>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiantian.mapper.question.AnswerUserMapper">
+
+    <resultMap id="BaseResultMap" type="com.tiantian.pojo.question.AnswerUser">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="uid" column="uid" jdbcType="INTEGER"/>
+            <result property="score" column="score" jdbcType="INTEGER"/>
+            <result property="paperId" column="paper_id" jdbcType="INTEGER"/>
+            <result property="programmingAnswer" column="programming_answer" jdbcType="VARCHAR"/>
+            <result property="programmingScore" column="programming_score" jdbcType="INTEGER"/>
+            <result property="chooseAnswer" column="choose_answer" jdbcType="VARCHAR"/>
+            <result property="chooseScore" column="choose_score" jdbcType="VARCHAR"/>
+            <result property="jQuestionAnswer" column="j_question_answer" jdbcType="VARCHAR"/>
+            <result property="jQuestionScore" column="j_question_score" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select id,
+             uid,
+             score,
+             paper_id,
+             programming_answer,
+             programming_score,
+             choose_answer,
+             choose_score,
+             j_question_answer,
+             j_question_score
+      from one_question_per_day_user
+      where id = #{id,jdbcType=INTEGER}
+    </select>
+
+  <select id="countAnswerTodayIsAnswer" resultType="java.lang.Integer">
+    select count(*)
+    from one_question_per_day_user where paper_id = #{paperId} and uid = #{uid}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from one_question_per_day_user
+        where  id = #{id,jdbcType=INTEGER} 
+    </delete>
+
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.tiantian.pojo.question.AnswerUser">
+      insert into one_question_per_day_user
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="uid != null">uid,</if>
+        <if test="score != null">score,</if>
+        <if test="paperId != null">paper_id,</if>
+        <if test="programmingAnswer != null">programming_answer,</if>
+        <if test="programmingScore != null">programming_score,</if>
+        <if test="chooseAnswer != null">choose_answer,</if>
+        <if test="chooseScore != null">choose_score,</if>
+        <if test="jQuestionAnswer != null">j_question_answer,</if>
+        <if test="jQuestionScore != null">j_question_score,</if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="uid != null">#{uid,jdbcType=INTEGER},</if>
+        <if test="score != null">#{score,jdbcType=INTEGER},</if>
+        <if test="paperId != null">#{paperId,jdbcType=INTEGER},</if>
+        <if test="programmingAnswer != null">#{programmingAnswer,jdbcType=VARCHAR},</if>
+        <if test="programmingScore != null">#{programmingScore,jdbcType=INTEGER},</if>
+        <if test="chooseAnswer != null">#{chooseAnswer,jdbcType=VARCHAR},</if>
+        <if test="chooseScore != null">#{chooseScore,jdbcType=VARCHAR},</if>
+        <if test="jQuestionAnswer != null">#{jQuestionAnswer,jdbcType=VARCHAR},</if>
+        <if test="jQuestionScore != null">#{jQuestionScore,jdbcType=VARCHAR},</if>
+      </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tiantian.pojo.question.AnswerUser">
+      update one_question_per_day_user
+      <set>
+        <if test="uid != null">
+          uid = #{uid,jdbcType=INTEGER},
+        </if>
+        <if test="score != null">
+          score = #{score,jdbcType=INTEGER},
+        </if>
+        <if test="paperId != null">
+          paper_id = #{paperId,jdbcType=INTEGER},
+        </if>
+        <if test="programmingAnswer != null">
+          programming_answer = #{programmingAnswer,jdbcType=VARCHAR},
+        </if>
+        <if test="programmingScore != null">
+          programming_score = #{programmingScore,jdbcType=INTEGER},
+        </if>
+        <if test="chooseAnswer != null">
+          choose_answer = #{chooseAnswer,jdbcType=VARCHAR},
+        </if>
+        <if test="chooseScore != null">
+          choose_score = #{chooseScore,jdbcType=VARCHAR},
+        </if>
+        <if test="jQuestionAnswer != null">
+          j_question_answer = #{jQuestionAnswer,jdbcType=VARCHAR},
+        </if>
+        <if test="jQuestionScore != null">
+          j_question_score = #{jQuestionScore,jdbcType=VARCHAR},
+        </if>
+      </set>
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.tiantian.pojo.question.AnswerUser">
+      update one_question_per_day_user
+      set uid                = #{uid,jdbcType=INTEGER},
+          score              = #{score,jdbcType=INTEGER},
+          paper_id           = #{paperId,jdbcType=INTEGER},
+          programming_answer = #{programmingAnswer,jdbcType=VARCHAR},
+          programming_score  = #{programmingScore,jdbcType=INTEGER},
+          choose_answer      = #{chooseAnswer,jdbcType=VARCHAR},
+          choose_score       = #{chooseScore,jdbcType=VARCHAR},
+          j_question_answer  = #{jQuestionAnswer,jdbcType=VARCHAR},
+          j_question_score   = #{jQuestionScore,jdbcType=VARCHAR}
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

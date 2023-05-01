@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.BlogMapper">
+  <resultMap id="BlogMapperResultMap" type="com.tiantian.pojo.Blog">
+    <!--映射关系-->
+    <id column="blog_id" property="blogId"/>
+    <result column="uid" property="uid"/>
+    <result column="username" property="username"/>
+    <result column="title" property="title"/>
+    <result column="context" property="context"/>
+    <result column="label" property="label"/>
+    <result column="release_time" property="releaseTime"/>
+    <result column="watch" property="watch"/>
+    <result column="star" property="star"/>
+    <result column="collection" property="collection"/>
+  </resultMap>
+
+  <select id="getArticleByBlogId" resultType="com.tiantian.pojo.Blog">
+    select *
+    from blog
+    where blog_id = #{blogId}
+  </select>
+  <select id="selectAll" resultType="com.tiantian.pojo.Blog">
+    select *
+    from blog
+  </select>
+
+  <select id="getBlogByUserId" resultType="com.tiantian.dto.UserBlogDTO">
+    select blog_id,
+           uid,
+           title,
+           watch,
+           star,
+           collection,
+           release_time
+    from blog
+    where uid = #{id}
+    order by watch desc, star desc, collection desc
+  </select>
+
+  <select id="getAllBlogByUid" resultType="com.tiantian.pojo.Blog">
+    select *
+    from blog
+    where uid = #{uid}
+  </select>
+
+  <select id="selectByKeyWord" resultType="com.tiantian.pojo.Blog">
+    select blog_id,
+           uid,
+           username,
+           title,
+           label,
+           release_time,
+           watch,
+           star,
+           collection
+    from blog
+    where title like concat('%', #{keyWord}, '%');
+  </select>
+
+  <select id="getBlogByLabel" resultType="com.tiantian.pojo.Blog">
+    select blog_id,
+           username,
+           title,
+           label,
+           release_time
+    from blog
+    where label = #{label};
+  </select>
+
+  <insert id="addBlog">
+    insert into blog(uid, username, title, context, label, release_time, watch, star, collection)
+    VALUES (#{uid}, #{username}, #{title}, #{context}, #{label}, #{releaseTime}, 0, 0, 0)
+  </insert>
+
+  <update id="updateBlogByUid" parameterType="com.tiantian.pojo.Blog">
+    update blog
+    <set>
+      <if test="title != null and title != ''">
+        title = #{title},
+      </if>
+      <if test="context != null and context != ''">
+        context = #{context},
+      </if>
+      <if test="label != null and label != ''">
+        label = #{label},
+      </if>
+    </set>
+    where blog_id = #{blogId} and uid = #{uid}
+  </update>
+
+  <delete id="deleteByBlogIdAndUserId">
+    delete
+    from blog
+    where blog_id = #{blogId}
+      and uid = #{uid};
+  </delete>
+
+  <update id="likeBlogByUid">
+    update blog
+    set star = star + 1
+    where blog_id = #{blogId}
+  </update>
+
+  <update id="UnLikeBlogByUid">
+    update blog
+    set star = star - 1
+    where blog_id = #{blogId}
+  </update>
+
+  <update id="minusOneCollection">
+    update blog
+    set collection = collection - 1
+    where blog_id = #{blogId}
+  </update>
+
+  <insert id="addOneCollection">
+    update blog
+    set collection = collection + 1
+    where blog_id = #{blogId}
+  </insert>
+
+
+</mapper>

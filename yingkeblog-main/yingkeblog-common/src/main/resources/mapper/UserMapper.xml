@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiantian.mapper.UserMapper">
+
+  <resultMap id="UserResultMap" type="com.tiantian.pojo.User">
+    <id property="uid" column="uid"/>
+    <id property="username" column="username"/>
+    <id property="email" column="email"/>
+    <result property="nickName" column="nick_name"/>
+    <result property="password" column="password"/>
+    <result property="headurl" column="headurl"/>
+  </resultMap>
+
+  <select id="selectEmailAndPassword" resultType="com.tiantian.pojo.User">
+    select *
+    from user
+    where email = #{email}
+      and password = #{password};
+  </select>
+
+  <select id="selectUserInfoById" resultType="com.tiantian.pojo.User">
+    select *
+    from user
+    where uid = #{uid};
+  </select>
+
+  <insert id="insertUserInfo" parameterType="com.tiantian.pojo.User" useGeneratedKeys="true" keyProperty="uid">
+    insert into user(username, password, email)
+    VALUES (#{username}, #{password}, #{email})
+  </insert>
+
+  <select id="selectUserInfoOne" resultType="com.tiantian.pojo.User">
+    select *
+    from user
+    where email = #{email};
+  </select>
+  <select id="getUserHeadUrlByUid" resultType="java.lang.String">
+    select headurl
+    from user
+    where uid = #{uid};
+  </select>
+
+  <select id="selectUserDTOByUid" resultType="com.tiantian.dto.UserDTO">
+    select uid, email, username, headurl
+    from user where uid = #{uid};
+  </select>
+
+  <update id="updateHeadUrl">
+    update user
+    set headurl = #{url}
+    where uid = #{uid}
+  </update>
+
+  <update id="updatePasswordByUid">
+    update user
+    set password = #{encryptionPwd}
+    where uid = #{uid}
+  </update>
+
+</mapper>

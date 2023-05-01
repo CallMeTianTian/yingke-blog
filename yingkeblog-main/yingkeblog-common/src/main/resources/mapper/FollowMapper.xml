@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.FollowMapper">
+  <resultMap id="FollowMapperResultMap" type="com.tiantian.pojo.Follow">
+    <!--映射关系-->
+    <id column="id" property="id"/>
+    <result column="user_id" property="userId"/>
+    <result column="follow_user_id" property="followUserId"/>
+    <result column="create_time" property="createTime"/>
+  </resultMap>
+
+  <resultMap id="userDTOResultMap" type="com.tiantian.dto.MyFollowDTO">
+    <id column="uid" property="uid"/>
+    <result column="username" property="username"/>
+    <result column="email" property="email"/>
+    <result column="headurl" property="headurl"/>
+    <result column="label" property="label" typeHandler="com.tiantian.handler.ListToVarcharTypeHandler"/>
+  </resultMap>
+
+  <insert id="addFollowByUid" parameterType="com.tiantian.pojo.Follow">
+    insert into tb_follow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null and userId!=''">user_id,</if>
+      <if test="followUserId != null and followUserId != ''">follow_user_id,</if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null and userId !=''">#{userId},</if>
+      <if test="followUserId != null and followUserId != ''">#{followUserId},</if>
+    </trim>
+  </insert>
+
+  <delete id="deleteByUserIdAndFollowUserId">
+    delete
+    from tb_follow
+    where user_id = #{userId}
+      and follow_user_id = #{followUserid};
+  </delete>
+
+  <select id="countByUserIdAndFollowUserid" resultType="java.lang.Integer">
+    select count(*)
+    from tb_follow where user_id = #{userId} and follow_user_id = #{followUserid};
+  </select>
+
+  <select id="selectMyLikeByUserId" resultMap="userDTOResultMap">
+    select u.uid, u.username, u.email, u.headurl, bui.label
+    from user u,
+         base_user_info bui
+    where (u.uid = bui.uid) in (select follow_user_id
+                                from tb_follow
+                                where user_id = #{userId});
+  </select>
+
+
+</mapper>

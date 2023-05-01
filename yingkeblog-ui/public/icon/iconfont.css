@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 3915697 */
+  src: url('iconfont.woff2?t=1677231495914') format('woff2'),
+       url('iconfont.woff?t=1677231495914') format('woff'),
+       url('iconfont.ttf?t=1677231495914') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 30px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-tuitetwitter43:before {
+  content: "\e707";
+}
+
+.icon-lianshu:before {
+  content: "\e633";
+}
+
+.icon-weixin:before {
+  content: "\e65f";
+}
+

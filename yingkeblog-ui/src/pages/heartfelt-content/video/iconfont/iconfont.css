@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('iconfont.woff2?t=1679026475382') format('woff2'),
+       url('iconfont.woff?t=1679026475382') format('woff'),
+       url('iconfont.ttf?t=1679026475382') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-shijian-xianxing:before {
+  content: "\e8c4";
+}
+
+.icon-pinglunxiao:before {
+  content: "\e8b9";
+}
+
+.icon-24gf-playCircle:before {
+  content: "\ea82";
+}
+

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiantian.mapper.BaseUserInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.tiantian.pojo.BaseUserInfo">
+            <id property="uid" column="uid"/>
+            <result property="identity" column="identity"/>
+            <result property="gender" column="gender"/>
+            <result property="username" column="username"/>
+            <result property="birthday" column="birthday"/>
+            <result property="label" column="label" typeHandler="com.tiantian.handler.ListToVarcharTypeHandler"/>
+            <result property="description" column="description"/>
+            <result property="schoolOrCorporation" column="school_or_corporation"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+      uid,gender
+      ,identity,username,
+        birthday,label,description,
+        school_or_corporation
+    </sql>
+
+    <select id="selectByUid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from base_user_info
+        where  uid = #{uid};
+    </select>
+  
+    <insert id="insert" keyColumn="uid" keyProperty="uid" parameterType="com.tiantian.pojo.BaseUserInfo">
+      insert into base_user_info
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="uid != null">uid,</if>
+        <if test="identity != null and identity != ''">identity,</if>
+        <if test="gender != null and gender != ''">gender,</if>
+        <if test="username != null and username != ''">username,</if>
+        <if test="birthday != null and birthday != ''">birthday,</if>
+        <if test="label != null and label != '' ">label,</if>
+        <if test="description != null and description != ''">description,</if>
+        <if test="schoolOrCorporation != null and schoolOrCorporation != ''">school_or_corporation,</if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="uid != null">#{uid},</if>
+        <if test="identity != null and identity != ''">#{identity},</if>
+        <if test="gender != null and gender != ''">#{gender},</if>
+        <if test="username != null and username != ''">#{username},</if>
+        <if test="birthday != null and birthday != ''">#{birthday},</if>
+        <if test="label != null and label != ''">#{label,typeHandler=com.tiantian.handler.ListToVarcharTypeHandler},
+        </if>
+        <if test="description != null and description != ''">#{description},</if>
+        <if test="schoolOrCorporation != null and schoolOrCorporation != ''">#{schoolOrCorporation},</if>
+      </trim>
+    </insert>
+  
+    <update id="updateByUid" parameterType="com.tiantian.pojo.BaseUserInfo">
+      update base_user_info
+      <set>
+        <if test="identity != null and  identity != '' ">
+          identity = #{identity},
+          </if>
+
+        <if test="gender != null and  gender != '' ">
+          gender = #{gender},
+        </if>
+          
+        <if test="username !=null and  username != '' ">
+          username = #{username},
+          </if>
+          
+        <if test="birthday != null and  birthday != ''">
+          birthday = #{birthday},
+          </if>
+          
+        <if test="label != null and  label != ''">
+          label = #{label,typeHandler=com.tiantian.handler.ListToVarcharTypeHandler},
+          </if>
+          
+        <if test="description != null and  description != ''">
+          description = #{description},
+          </if>
+          
+        <if test="schoolOrCorporation != null and schoolOrCorporation != ''">
+          school_or_corporation = #{schoolOrCorporation}
+        </if>
+
+      </set>
+      where uid = #{uid}
+    </update>
+</mapper>

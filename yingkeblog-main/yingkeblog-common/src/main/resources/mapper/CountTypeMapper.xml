@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tiantian.mapper.CountTypeMapper">
+  <resultMap id="CountTypeMapperResultMap" type="com.tiantian.pojo.CountType">
+    <result column="java" property="java"/>
+    <result column="algorithm" property="algorithm"/>
+    <result column="essay" property="essay"/>
+    <result column="vue" property="vue"/>
+    <result column="css" property="css"/>
+    <result column="javascript" property="javascript"/>
+  </resultMap>
+
+  <select id="countType" resultMap="CountTypeMapperResultMap">
+    select sum(label = 'java')       as java,
+           sum(label = 'algorithm')  as algorithm,
+           sum(label = 'essay')      as essay,
+           sum(label = 'vue')        as vue,
+           sum(label = 'css')        as css,
+           sum(label = 'python')     as python,
+           sum(label = 'JavaScript') as JavaScript
+    from blog;
+  </select>
+</mapper>

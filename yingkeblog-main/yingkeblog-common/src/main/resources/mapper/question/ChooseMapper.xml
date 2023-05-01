@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tiantian.mapper.question.ChooseMapper">
+
+    <resultMap id="BaseResultMap" type="com.tiantian.pojo.question.Choose">
+            <id property="questionId" column="question_id" jdbcType="INTEGER"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="exampleCode" column="example_code" jdbcType="VARCHAR"/>
+            <result property="question" column="question" jdbcType="VARCHAR"/>
+            <result property="aAnswer" column="a_answer" jdbcType="VARCHAR"/>
+            <result property="bAnswer" column="b_answer" jdbcType="VARCHAR"/>
+            <result property="cAnswer" column="c_answer" jdbcType="VARCHAR"/>
+            <result property="dAnswer" column="d_answer" jdbcType="VARCHAR"/>
+            <result property="rightAnswer" column="right_answer" jdbcType="VARCHAR"/>
+            <result property="score" column="score" jdbcType="INTEGER"/>
+            <result property="level" column="level" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="selectOne" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select question_id,
+             type,
+             example_code,
+             question,
+             a_answer,
+             b_answer,
+             c_answer,
+             d_answer,
+             right_answer,
+             score,
+             level
+      from one_question_per_day_choose
+      limit 1;
+    </select>
+  <select id="getByQuestionId" resultType="com.tiantian.pojo.question.Choose">
+    select question_id,
+           type,
+           example_code,
+           question,
+           a_answer,
+           b_answer,
+           c_answer,
+           d_answer,
+           right_answer,
+           score,
+           level
+    from one_question_per_day_choose
+where question_id = #{questionId}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from one_question_per_day_choose
+        where  question_id = #{questionId,jdbcType=INTEGER} 
+    </delete>
+    <insert id="insert" keyColumn="question_id" keyProperty="questionId" parameterType="com.tiantian.pojo.question.Choose">
+      insert into one_question_per_day_choose
+      ( question_id, type,example_code, question
+      , a_answer, b_answer, c_answer
+      , d_answer, right_answer, score
+      , level)
+      values ( #{questionId,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR},#{exampleCode,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}
+             , #{aAnswer,jdbcType=VARCHAR}, #{bAnswer,jdbcType=VARCHAR}, #{cAnswer,jdbcType=VARCHAR}
+             , #{dAnswer,jdbcType=VARCHAR}, #{rightAnswer,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}
+             , #{level,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="question_id" keyProperty="questionId" parameterType="com.tiantian.pojo.question.Choose">
+        insert into one_question_per_day_choose
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="questionId != null">question_id,</if>
+                <if test="type != null">type,</if>
+                <if test="exampleCode != null">example_code,</if>
+                <if test="question != null">question,</if>
+                <if test="aAnswer != null">a_answer,</if>
+                <if test="bAnswer != null">b_answer,</if>
+                <if test="cAnswer != null">c_answer,</if>
+                <if test="dAnswer != null">d_answer,</if>
+                <if test="rightAnswer != null">right_answer,</if>
+                <if test="score != null">score,</if>
+                <if test="level != null">level,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="questionId != null">#{questionId,jdbcType=INTEGER},</if>
+                <if test="type != null">#{type,jdbcType=VARCHAR},</if>
+                <if test="exampleCode != null">#{exampleCode,jdbcType=VARCHAR},</if>
+                <if test="question != null">#{question,jdbcType=VARCHAR},</if>
+                <if test="aAnswer != null">#{aAnswer,jdbcType=VARCHAR},</if>
+                <if test="bAnswer != null">#{bAnswer,jdbcType=VARCHAR},</if>
+                <if test="cAnswer != null">#{cAnswer,jdbcType=VARCHAR},</if>
+                <if test="dAnswer != null">#{dAnswer,jdbcType=VARCHAR},</if>
+                <if test="rightAnswer != null">#{rightAnswer,jdbcType=VARCHAR},</if>
+                <if test="score != null">#{score,jdbcType=INTEGER},</if>
+                <if test="level != null">#{level,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.tiantian.pojo.question.Choose">
+        update one_question_per_day_choose
+        <set>
+                <if test="type != null">
+                    type = #{type,jdbcType=VARCHAR},
+                </if>
+          <if test="exampleCode != null">
+            example_code = #{exampleCode,jdbcType=VARCHAR},
+          </if>
+                <if test="question != null">
+                    question = #{question,jdbcType=VARCHAR},
+                </if>
+                <if test="aAnswer != null">
+                    a_answer = #{aAnswer,jdbcType=VARCHAR},
+                </if>
+                <if test="bAnswer != null">
+                    b_answer = #{bAnswer,jdbcType=VARCHAR},
+                </if>
+                <if test="cAnswer != null">
+                    c_answer = #{cAnswer,jdbcType=VARCHAR},
+                </if>
+                <if test="dAnswer != null">
+                    d_answer = #{dAnswer,jdbcType=VARCHAR},
+                </if>
+                <if test="rightAnswer != null">
+                    right_answer = #{rightAnswer,jdbcType=VARCHAR},
+                </if>
+                <if test="score != null">
+                    score = #{score,jdbcType=INTEGER},
+                </if>
+                <if test="level != null">
+                    level = #{level,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   question_id = #{questionId,jdbcType=INTEGER} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.tiantian.pojo.question.Choose">
+        update one_question_per_day_choose
+        set 
+            type =  #{type,jdbcType=VARCHAR},
+            question =  #{question,jdbcType=VARCHAR},
+            example_code =  #{exampleCode,jdbcType=VARCHAR},
+            a_answer =  #{aAnswer,jdbcType=VARCHAR},
+            b_answer =  #{bAnswer,jdbcType=VARCHAR},
+            c_answer =  #{cAnswer,jdbcType=VARCHAR},
+            d_answer =  #{dAnswer,jdbcType=VARCHAR},
+            right_answer =  #{rightAnswer,jdbcType=VARCHAR},
+            score =  #{score,jdbcType=INTEGER},
+            level =  #{level,jdbcType=VARCHAR}
+        where   question_id = #{questionId,jdbcType=INTEGER} 
+    </update>
+</mapper>
