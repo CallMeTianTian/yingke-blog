@@ -6,9 +6,9 @@
 
 演示视频: https://www.bilibili.com/video/BV1nh41177Rv/ (有不好的地方 请多多指正)
 演示图片:
-![登录页面](doc/image/63.登录页面.png)
-![注册页面](doc/image/64.%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2.png)
-![首页](doc/image/57.%E9%A6%96%E9%A1%B5.png)
+![登录页面](https://raw.githubusercontent.com/CallMeTianTian/yingke-blog/master/doc/image/63.%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
+![注册页面](https://raw.githubusercontent.com/CallMeTianTian/yingke-blog/master/doc/image/64.%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2.png)
+![首页](https://raw.githubusercontent.com/CallMeTianTian/yingke-blog/master/doc/image/57.%E9%A6%96%E9%A1%B5.png)
 ![博客列表](doc/image/58.%E5%8D%9A%E5%AE%A2%E9%A1%B5%E9%9D%A2.png)
 ![写作](doc/image/04.%E5%86%99%E4%BD%9Cmarkdown%E5%AE%9E%E6%97%B6%E9%A2%84%E8%A7%88.png)
 ![记录学习](doc/image/02.%E8%AE%B0%E5%BD%95%E5%AD%A6%E4%B9%A0.png)
