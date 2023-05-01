@@ -3,6 +3,7 @@
 > **应科博客** 是一个由JavaEE开发的博客系统，基于经典主流技术组合（SpringBoot、Sa-token、MyBatis、Jwt、Vue），内置模块如下:
 >
 > 登录注册、每日刷题、书写文章、博客管理、动态博客分类、博客发布、用户评论、权限校验、个人信息管理、定时任务、视频播放等。
+
 演示视频: https://www.bilibili.com/video/BV1nh41177Rv/ (有不好的地方 请多多指正)
 演示图片:
 ![登录页面](doc/image/63.%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
