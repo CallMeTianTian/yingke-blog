@@ -6,7 +6,7 @@
 
 演示视频: https://www.bilibili.com/video/BV1nh41177Rv/ (有不好的地方 请多多指正)
 演示图片:
-![登录页面](doc/image/63.%E7%99%BB%E5%BD%95%E9%A1%B5%E9%9D%A2.png)
+![登录页面](doc/image/63.登录页面.png)
 ![注册页面](doc/image/64.%E6%B3%A8%E5%86%8C%E9%A1%B5%E9%9D%A2.png)
 ![首页](doc/image/57.%E9%A6%96%E9%A1%B5.png)
 ![博客列表](doc/image/58.%E5%8D%9A%E5%AE%A2%E9%A1%B5%E9%9D%A2.png)
