@@ -75,7 +75,7 @@
 1. SpringBoot 2.7.9
 1. 其他相关依赖版本如图:
 
-<img src=".\image\03.后端依赖.png" style="zoom:80%;" />
+![输入图片说明](doc/image/03.%E5%90%8E%E7%AB%AF%E4%BE%9D%E8%B5%96.png)
 
 3. Maven 3.8.1
 4. Vue 2.6.14
